@@ -14,6 +14,6 @@ fn main() {
     let input = heavyside_step(K, step_time, step_value);
 
     let ss = DTLSS::new(A,B, C, D);
-    let (states, _) = ss.lsim(K, input);
+    let (states, _) = ss.step(K);
     generate_sim_results_plot(&states).unwrap();
 }

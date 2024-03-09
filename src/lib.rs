@@ -109,4 +109,11 @@ impl DTLSS<f32> {
         }
         (states, outputs)
     }
+
+    pub fn step(&self, K: usize) -> (Vec<Vector3<f32>>, Vec<Vector1<f32>>){
+        let step_time = 0;
+        let step_value = 1.0;
+        let input = heavyside_step(K, step_time, step_value);
+        self.lsim(K, input)
+    }
 }
