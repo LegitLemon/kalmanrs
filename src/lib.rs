@@ -98,12 +98,15 @@ impl DTLSS<f32> {
         &self,
         K: usize,
         U: Vec<Vector1<f32>>,
-    ) -> Vec<Vector3<f32>> {
+    ) -> (Vec<Vector3<f32>>, Vec<Vector1<f32>>) {
         let mut states: Vec<Vector3<f32>> = Vec::new();
+        let mut outputs: Vec<Vector1<f32>> = Vec::new();
         states.push(vector![2.0, 1.0, 3.0]);
+        outputs.push(&self.C * vector![2.0, 1.0, 3.0]);
         for k in 1..K {
             states.push(&self.A * states[k - 1] + &self.B * U[k - 1]);
+            outputs.push(&self.C * &states[k]);
         }
-        states
+        (states, outputs)
     }
 }
